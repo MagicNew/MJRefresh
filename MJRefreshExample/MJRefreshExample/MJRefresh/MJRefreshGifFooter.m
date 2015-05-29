@@ -77,7 +77,7 @@
     _refreshingImages = refreshingImages;
     
     self.gifView.animationImages = refreshingImages;
-    self.gifView.animationDuration = refreshingImages.count * 0.1;
+//    self.gifView.animationDuration = refreshingImages.count * 0.1;
     
     // 根据图片设置控件的高度
     UIImage *image = [refreshingImages firstObject];
