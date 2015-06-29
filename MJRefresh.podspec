@@ -10,4 +10,5 @@ Pod::Spec.new do |s|
   s.source_files = "MJRefreshExample/MJRefreshExample/MJRefresh/*.{h,m}"
   s.resource     = "MJRefreshExample/MJRefreshExample/MJRefresh/MJRefresh.bundle"
   s.requires_arc = true
+  s.dependency 'SVProgressHUD', '~> 1.1.3'
 end

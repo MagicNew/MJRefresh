@@ -9,6 +9,9 @@
 #define MJLog(...)
 #endif
 
+#define DEGREES_TO_RADIANS(x) (x)/180.0*M_PI
+
+
 // 过期提醒
 #define MJDeprecated(instead) NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, instead)
 

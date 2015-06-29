@@ -8,24 +8,35 @@
 //
 
 #import "MJRefreshLegendFooter.h"
+#import "UIScrollView+MJExtension.h"
 #import "MJRefreshConst.h"
 #import "UIView+MJExtension.h"
-#import "UIScrollView+MJExtension.h"
+#import "MJLDMCircleView.h"
+#import "SVIndefiniteAnimatedView.h"
 
 @interface MJRefreshLegendFooter()
-@property (nonatomic, weak) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) SVIndefiniteAnimatedView *activityView;
 @end
 
 @implementation MJRefreshLegendFooter
-#pragma mark - 懒加载
-- (UIActivityIndicatorView *)activityView
-{
+
+#pragma mark - lazy load
+
+- (SVIndefiniteAnimatedView *)activityView {
     if (!_activityView) {
-        UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        [self addSubview:_activityView = activityView];
+        _activityView = [[SVIndefiniteAnimatedView alloc] initWithFrame:CGRectZero];
+        _activityView.strokeThickness = 1.0f;
+        _activityView.strokeColor = [UIColor colorWithRed:0x66/255.0 green:0x66/255.0 blue:0x66/255.0 alpha:1];
+        _activityView.radius = 10.0f;
+        _activityView.center = self.center;
+        _activityView.alpha = 0.0;
+        [_activityView sizeToFit];
+        [self addSubview:_activityView];
+        [self bringSubviewToFront:_activityView];
     }
     return _activityView;
 }
+
 
 #pragma mark - 初始化方法
 - (void)layoutSubviews
@@ -47,15 +58,16 @@
     
     switch (state) {
         case MJRefreshFooterStateIdle:
-            [self.activityView stopAnimating];
+            
+            self.activityView.alpha = .0f;
             break;
             
         case MJRefreshFooterStateRefreshing:
-            [self.activityView startAnimating];
+            self.activityView.alpha = 1.0f;
             break;
             
         case MJRefreshFooterStateNoMoreData:
-            [self.activityView stopAnimating];
+            self.activityView.alpha = .0f;
             break;
             
         default:
